@@ -1,0 +1,29 @@
+{
+    "name": "alfa/laravel-has-many-sync",
+    "description": "Laravel has many sync",
+    "type": "library",
+    "require": {
+        "illuminate/support": "~5.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alfa Adhitya",
+            "email": "alfa2159@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Alfa\\EloquentHasManySync\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Alfa\\EloquentHasManySync\\ServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
