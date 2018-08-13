@@ -1,5 +1,5 @@
 {
-    "name": "alfa/laravel-has-many-sync",
+    "name": "alfa6661/laravel-has-many-sync",
     "description": "Laravel has many sync",
     "type": "library",
     "require": {
@@ -14,13 +14,13 @@
     ],
     "autoload": {
         "psr-4": {
-            "Alfa\\EloquentHasManySync\\": "src"
+            "Alfa6661\\EloquentHasManySync\\": "src"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Alfa\\EloquentHasManySync\\ServiceProvider"
+                "Alfa6661\\EloquentHasManySync\\ServiceProvider"
             ]
         }
     },
