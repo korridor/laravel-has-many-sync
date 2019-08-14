@@ -73,6 +73,7 @@ class ServiceProvider extends BaseServiceProvider
 
             foreach ($updatedRows as $row) {
                 $this->getRelated()->where($relatedKeyName, $castKey(array_get($row, $relatedKeyName)))
+					->first()
                     ->update($row);
             }
 
