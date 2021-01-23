@@ -4,6 +4,7 @@ namespace Alfa6661\EloquentHasManySync;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Illuminate\Support\Arr;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -45,7 +46,7 @@ class ServiceProvider extends BaseServiceProvider
 
             // Get any non-matching rows.
             $deletedKeys = array_diff($current, $castKeys(
-                array_pluck($data, $relatedKeyName))
+                Arr::pluck($data, $relatedKeyName))
             );
 
             if ($deleting && count($deletedKeys) > 0) {
@@ -55,13 +56,13 @@ class ServiceProvider extends BaseServiceProvider
 
             // Separate the submitted data into "update" and "new"
             // We determine "newRows" as those whose $relatedKeyName (usually 'id') is null.
-            $newRows = array_where($data, function ($row) use ($relatedKeyName) {
-                return array_get($row, $relatedKeyName) === null;
+            $newRows = Arr::where($data, function ($row) use ($relatedKeyName) {
+                return Arr::get($row, $relatedKeyName) === null;
             });
 
             // We determine "updateRows" as those whose $relatedKeyName (usually 'id') is set, not null.
-            $updatedRows = array_where($data, function ($row) use ($relatedKeyName) {
-                return array_get($row, $relatedKeyName) !== null;
+            $updatedRows = Arr::where($data, function ($row) use ($relatedKeyName) {
+                return Arr::get($row, $relatedKeyName) !== null;
             });
 
             if (count($newRows) > 0) {
@@ -72,12 +73,12 @@ class ServiceProvider extends BaseServiceProvider
             }
 
             foreach ($updatedRows as $row) {
-                $this->getRelated()->where($relatedKeyName, $castKey(array_get($row, $relatedKeyName)))
-					->first()
+                $this->getRelated()->where($relatedKeyName, $castKey(Arr::get($row, $relatedKeyName)))
+                    ->first()
                     ->update($row);
             }
 
-            $changes['updated'] = $castKeys(array_pluck($updatedRows, $relatedKeyName));
+            $changes['updated'] = $castKeys(Arr::pluck($updatedRows, $relatedKeyName));
 
             return $changes;
         });
