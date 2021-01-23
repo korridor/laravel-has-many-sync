@@ -3,7 +3,8 @@
     "description": "Laravel has many sync",
     "type": "library",
     "require": {
-        "illuminate/support": "~5.4"
+        "illuminate/support": "8.*",
+        "illuminate/database": "8.*"
     },
     "license": "MIT",
     "authors": [
