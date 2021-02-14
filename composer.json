@@ -1,21 +1,40 @@
 {
-    "name": "alfa6661/laravel-has-many-sync",
+    "name": "korridor/laravel-has-many-sync",
     "description": "Laravel has many sync",
+    "keywords": ["laravel", "eloquent", "relations", "has-many", "sync"],
+    "homepage": "https://github.com/korridor/laravel-has-many-sync",
     "type": "library",
-    "require": {
-        "illuminate/support": "~5.4|6.*|7.*|8.*",
-        "illuminate/database": "~5.4|6.*|7.*|8.*"
-    },
     "license": "MIT",
     "authors": [
+        {
+            "name": "korridor",
+            "email": "26689068+korridor@users.noreply.github.com"
+        },
         {
             "name": "Alfa Adhitya",
             "email": "alfa2159@gmail.com"
         }
     ],
+    "require": {
+        "php": "^7.1|^8",
+        "illuminate/database": "6.*|7.*|8.*",
+        "illuminate/support": "6.*|7.*|8.*"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0|^5.0|^6.0",
+        "phpunit/phpunit": "^7.0|^8.0|^9.0",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "squizlabs/php_codesniffer": "^3.5"
+    },
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Alfa6661\\EloquentHasManySync\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Korridor\\LaravelHasManySync\\Tests\\": "tests/"
         }
     },
     "extra": {
@@ -25,6 +44,13 @@
             ]
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "fix": "./vendor/bin/php-cs-fixer fix",
+        "lint": "./vendor/bin/phpcs --extensions=php"
+    },
+    "config": {
+        "sort-packages": true
+    }
 }
