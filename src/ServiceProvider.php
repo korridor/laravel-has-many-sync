@@ -3,8 +3,8 @@
 namespace Alfa6661\EloquentHasManySync;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\Support\Arr;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -45,9 +45,7 @@ class ServiceProvider extends BaseServiceProvider
             };
 
             // Get any non-matching rows.
-            $deletedKeys = array_diff($current, $castKeys(
-                Arr::pluck($data, $relatedKeyName))
-            );
+            $deletedKeys = array_diff($current, $castKeys(Arr::pluck($data, $relatedKeyName)));
 
             if ($deleting && count($deletedKeys) > 0) {
                 $this->getRelated()->destroy($deletedKeys);
@@ -57,12 +55,12 @@ class ServiceProvider extends BaseServiceProvider
             // Separate the submitted data into "update" and "new"
             // We determine "newRows" as those whose $relatedKeyName (usually 'id') is null.
             $newRows = Arr::where($data, function ($row) use ($relatedKeyName) {
-                return Arr::get($row, $relatedKeyName) === null;
+                return null === Arr::get($row, $relatedKeyName);
             });
 
             // We determine "updateRows" as those whose $relatedKeyName (usually 'id') is set, not null.
             $updatedRows = Arr::where($data, function ($row) use ($relatedKeyName) {
-                return Arr::get($row, $relatedKeyName) !== null;
+                return null !== Arr::get($row, $relatedKeyName);
             });
 
             if (count($newRows) > 0) {
