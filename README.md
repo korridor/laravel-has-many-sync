@@ -25,6 +25,7 @@ This package is tested for the following Laravel versions:
 - 8.* (PHP 7.3, 7.4, 8.0)
 - 7.* (PHP 7.2, 7.3, 7.4)
 - 6.* (PHP 7.2, 7.3)
+- 5.8.* (PHP 7.1, 7.2)
 
 ## Usage
 
