@@ -6,6 +6,11 @@ language: php
 
 matrix:
     include:
+        # Laravel 5.8.*
+        -   php: 7.1
+            env: LARAVEL='5.8.*' COMPOSER_FLAGS='--prefer-stable'
+        -   php: 7.2
+            env: LARAVEL='5.8.*' COMPOSER_FLAGS='--prefer-stable'
         # Laravel 6.*
         -   php: 7.2
             env: LARAVEL='6.*' COMPOSER_FLAGS='--prefer-stable'
