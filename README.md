@@ -15,7 +15,7 @@ Allow sync method for Laravel Has Many Relationship.
 You can install the package via composer with following command:
 
 ```bash
-composer require korridor/laravel-hasmany-sync
+composer require korridor/laravel-has-many-sync
 ```
 
 ### Requirements
