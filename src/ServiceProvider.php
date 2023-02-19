@@ -1,6 +1,8 @@
 <?php
 
-namespace Alfa6661\EloquentHasManySync;
+declare(strict_types=1);
+
+namespace Korridor\LaravelHasManySync;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
@@ -13,9 +15,9 @@ class ServiceProvider extends BaseServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        HasMany::macro('sync', function (array $data, $deleting = true) {
+        HasMany::macro('sync', function (array $data, bool $deleting = true): array {
             $changes = [
                 'created' => [], 'deleted' => [], 'updated' => [],
             ];
@@ -71,7 +73,8 @@ class ServiceProvider extends BaseServiceProvider
             }
 
             foreach ($updatedRows as $row) {
-                $this->getRelated()->where($relatedKeyName, $castKey(Arr::get($row, $relatedKeyName)))
+                $this->getRelated()
+                    ->where($relatedKeyName, $castKey(Arr::get($row, $relatedKeyName)))
                     ->first()
                     ->update($row);
             }

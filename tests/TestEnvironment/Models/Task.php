@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Korridor\LaravelHasManySync\Tests\TestEnvironment\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -22,9 +24,9 @@ class Task extends Model
     ];
 
     /**
-     * @return BelongsTo|User
+     * @return BelongsTo<User>
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

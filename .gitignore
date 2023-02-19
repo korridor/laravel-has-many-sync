@@ -10,12 +10,14 @@
 .Spotlight-V100
 .Trashes
 ehthumbs.db
-Thumbs.db
 
 # Custom #
 ######################
+Thumbs.db
 vendor
 coverage
 composer.lock
+.php_cs.cache
 .php-cs-fixer.cache
 .phpunit.result.cache
+.phpunit.cache

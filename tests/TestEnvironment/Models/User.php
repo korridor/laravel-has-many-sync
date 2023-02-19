@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Korridor\LaravelHasManySync\Tests\TestEnvironment\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -20,9 +22,9 @@ class User extends Model
     ];
 
     /**
-     * @return HasMany|Task
+     * @return HasMany<Task>
      */
-    public function tasks()
+    public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
     }
