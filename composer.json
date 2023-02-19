@@ -16,20 +16,20 @@
         }
     ],
     "require": {
-        "php": "^7.1|^8",
-        "illuminate/database": "^5.8|6.*|7.*|8.*|9.*",
-        "illuminate/support": "^5.8|6.*|7.*|8.*|9.*"
+        "php": ">=8.1",
+        "illuminate/database": "^10",
+        "illuminate/support": "^10"
     },
     "require-dev": {
-        "orchestra/testbench": "^3.8|^4.0|^5.0|^6.0|^7",
-        "phpunit/phpunit": "^7.0|^8.0|^9.0",
-        "friendsofphp/php-cs-fixer": "^2.16|^3",
+        "orchestra/testbench": "^8",
+        "phpunit/phpunit": "^10.0",
+        "friendsofphp/php-cs-fixer": "^3",
         "squizlabs/php_codesniffer": "^3.5"
     },
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "Alfa6661\\EloquentHasManySync\\": "src"
+            "Korridor\\LaravelHasManySync\\": "src"
         }
     },
     "autoload-dev": {
@@ -40,15 +40,18 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Alfa6661\\EloquentHasManySync\\ServiceProvider"
+                "Korridor\\LaravelHasManySync\\ServiceProvider"
             ]
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
-        "fix": "./vendor/bin/php-cs-fixer fix",
-        "lint": "./vendor/bin/phpcs --extensions=php"
+        "test": "@php vendor/bin/phpunit",
+        "test-coverage": [
+            "@putenv XDEBUG_MODE=coverage",
+            "@php vendor/bin/phpunit --coverage-html coverage"
+        ],
+        "fix": "@php ./vendor/bin/php-cs-fixer fix",
+        "lint": "@php ./vendor/bin/phpcs --extensions=php"
     },
     "config": {
         "sort-packages": true

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Korridor\LaravelHasManySync\Tests;
 
 use Illuminate\Database\Eloquent\Model;
@@ -11,34 +13,34 @@ class HasManySyncTest extends TestCase
 {
     use RefreshDatabase;
 
-    private function createTwoUsersWithTwoTasksEach()
+    private function createTwoUsersWithTwoTasksEach(): void
     {
         Model::unguard();
-        User::create([
+        User::query()->create([
             'id' => 1,
             'name' => 'Tester 1',
         ]);
-        User::create([
+        User::query()->create([
             'id' => 2,
             'name' => 'Tester 2',
         ]);
 
-        Task::create([
+        Task::query()->create([
             'id' => 1,
             'user_id' => 1,
             'content' => 'Task 1 of Tester 1',
         ]);
-        Task::create([
+        Task::query()->create([
             'id' => 2,
             'user_id' => 1,
             'content' => 'Task 2 of Tester 1',
         ]);
-        Task::create([
+        Task::query()->create([
             'id' => 3,
             'user_id' => 2,
             'content' => 'Task 1 of Tester 2',
         ]);
-        Task::create([
+        Task::query()->create([
             'id' => 4,
             'user_id' => 2,
             'content' => 'Task 2 of Tester 2',
@@ -46,12 +48,14 @@ class HasManySyncTest extends TestCase
         Model::reguard();
     }
 
-    public function testHasManySyncCreatesUpdatesAndDeletesIfDeletingIsActivated()
+    public function testHasManySyncCreatesUpdatesAndDeletesIfDeletingIsActivated(): void
     {
         // Arrange
         $this->createTwoUsersWithTwoTasksEach();
-        $user1 = User::find(1);
-        $user2 = User::find(2);
+        /** @var User $user1 */
+        $user1 = User::query()->find(1);
+        /** @var User $user2 */
+        $user2 = User::query()->find(2);
 
         // Act
         $user1->tasks()->sync([
@@ -69,7 +73,7 @@ class HasManySyncTest extends TestCase
         ], true);
 
         // Assert
-        $this->assertEquals(4, Task::count());
+        $this->assertEquals(4, Task::query()->count());
         $this->assertEquals(5, Task::withTrashed()->count());
         $this->assertDatabaseHas('tasks', [
             'content' => 'Tasks 3 of Tester 1',
@@ -101,12 +105,14 @@ class HasManySyncTest extends TestCase
         ]);
     }
 
-    public function testHasManySyncCreatesUpdatesAndButDoesNotDeleteIfDeletingIsDeactivated()
+    public function testHasManySyncCreatesUpdatesAndButDoesNotDeleteIfDeletingIsDeactivated(): void
     {
         // Arrange
         $this->createTwoUsersWithTwoTasksEach();
-        $user1 = User::find(1);
-        $user2 = User::find(2);
+        /** @var User $user1 */
+        $user1 = User::query()->find(1);
+        /** @var User $user2 */
+        $user2 = User::query()->find(2);
 
         // Act
         $user1->tasks()->sync([
@@ -124,7 +130,7 @@ class HasManySyncTest extends TestCase
         ], false);
 
         // Assert
-        $this->assertEquals(5, Task::count());
+        $this->assertEquals(5, Task::query()->count());
         $this->assertEquals(5, Task::withTrashed()->count());
         $this->assertDatabaseHas('tasks', [
             'content' => 'Tasks 3 of Tester 1',

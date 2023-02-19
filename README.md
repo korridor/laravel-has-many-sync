@@ -2,11 +2,9 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/korridor/laravel-has-many-sync?style=flat-square)](https://packagist.org/packages/korridor/laravel-has-many-sync)
 [![License](https://img.shields.io/packagist/l/korridor/laravel-has-many-sync?style=flat-square)](license.md)
+[![GitHub Workflow Lint](https://img.shields.io/github/actions/workflow/status/korridor/laravel-has-many-sync/lint.yml?label=lint&style=flat-square)](https://github.com/korridor/laravel-has-many-sync/actions/workflows/lint.yml)
+[![GitHub Workflow Tests](https://img.shields.io/github/actions/workflow/status/korridor/laravel-has-many-sync/unittests.yml?label=tests&style=flat-square)](https://github.com/korridor/laravel-has-many-sync/actions/workflows/unittests.yml)
 [![Codecov](https://img.shields.io/codecov/c/github/korridor/laravel-has-many-sync?style=flat-square)](https://codecov.io/gh/korridor/laravel-has-many-sync)
-[![TravisCI](https://img.shields.io/travis/korridor/laravel-has-many-sync?style=flat-square)](https://travis-ci.org/korridor/laravel-has-many-sync)
-[![StyleCI](https://styleci.io/repos/202400425/shield)](https://styleci.io/repos/202400425)
-
-**Note: This package is a fork of [alfa6661/laravel-hasmany-sync](https://github.com/alfa6661/laravel-hasmany-sync). I already added tests and I plan to add more feature in the future.** 
 
 Allow sync method for Laravel Has Many Relationship.
 
@@ -18,14 +16,19 @@ You can install the package via composer with following command:
 composer require korridor/laravel-has-many-sync
 ```
 
+If you want to use this package with older Laravel/PHP version please install the 1.* version.
+
+```bash
+composer require korridor/laravel-has-many-merged "^1"
+```
+
+**Warning: The 1.\* versions use a different namespace!**
+
 ### Requirements
 
 This package is tested for the following Laravel and PHP versions:
 
- - 9.* (PHP 8.0, 8.1)
- - 8.* (PHP 7.4, 8.0, 8.1)
- - 7.* (PHP 7.2, 7.3, 7.4)
- - 6.* (PHP 7.2, 7.3)
+ - 10.* (PHP 8.1, 8.2)
 
 ## Usage
 
@@ -35,9 +38,9 @@ This package is tested for the following Laravel and PHP versions:
 class Customer extends Model
 {
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany<CustomerContact>
      */
-    public function contacts()
+    public function contacts(): HasMany
     {
         return $this->hasMany(CustomerContact::class);
     }
@@ -129,6 +132,10 @@ The `composer test-coverage` command runs all tests with phpunit and creates a c
 
 The `composer fix` command formats the code with [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer).
 The `composer lint` command checks the code with [phpcs](https://github.com/squizlabs/PHP_CodeSniffer).
+
+## Credits
+
+This package is a fork of [alfa6661/laravel-hasmany-sync](https://github.com/alfa6661/laravel-hasmany-sync).
 
 ## License
 
