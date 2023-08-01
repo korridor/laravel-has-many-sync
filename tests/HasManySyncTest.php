@@ -162,4 +162,50 @@ class HasManySyncTest extends TestCase
             'deleted_at' => null,
         ]);
     }
+
+    public function testHasManySyncIgnoresRelatedIdsForUpdateWhenNotRelatedToParent(): void
+    {
+        // Arrange
+        $this->createTwoUsersWithTwoTasksEach();
+
+        /** @var User $user1 */
+        $user1 = User::query()->find(1);
+
+        // Act
+        $user1->tasks()->sync([
+            // Update
+            [
+                'id' => 1,
+                'content' => 'Updated Task 1 of Tester 1',
+            ],
+            // Update
+            [
+                'id' => 2,
+                'content' => 'Updated Task 2 of Tester 1',
+            ],
+            // Update that should ignore the id and create a new task
+            [
+                'id' => 3, // id from a task which belongs to user 2
+                'content' => 'Trying to change a task which is not mine',
+            ],
+        ]);
+
+        // Assert
+
+        // should not have changed the task from user2
+        $this->assertDatabaseHas('tasks', [
+            'id' => 3,
+            'user_id' => 2,
+            'content' => 'Task 1 of Tester 2',
+            'deleted_at' => null,
+        ]);
+
+        // should ignore id=3 and create a new task for user 1
+        $this->assertDatabaseHas('tasks', [
+            'id' => 5,
+            'user_id' => 1,
+            'content' => 'Trying to change a task which is not mine',
+            'deleted_at' => null,
+        ]);
+    }
 }

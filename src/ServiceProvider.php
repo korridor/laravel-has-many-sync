@@ -30,6 +30,13 @@ class ServiceProvider extends BaseServiceProvider
             // Get the current key values.
             $current = $this->newQuery()->pluck($relatedKeyName)->all();
 
+            // If the key value of the related entity does not belong to this parent, sets it to null to be considered as a new record
+            foreach ($data as $index => $relatedData) {
+                if (!in_array($relatedData[$relatedKeyName], $current, true)) {
+                    $data[$index][$relatedKeyName] = null;
+                }
+            }
+
             // Cast the given key to an integer if it is numeric.
             $castKey = function ($value) {
                 if (is_null($value)) {
