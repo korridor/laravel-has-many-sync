@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Korridor\LaravelHasManySync\Tests;
 
+use Illuminate\Database\Capsule\Manager;
 use Korridor\LaravelHasManySync\ServiceProvider;
 use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as Orchestra;
