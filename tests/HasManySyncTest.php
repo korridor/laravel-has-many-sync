@@ -6,7 +6,6 @@ namespace Korridor\LaravelHasManySync\Tests;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Korridor\LaravelHasManySync\Tests\TestEnvironment\Models\Task;
 use Korridor\LaravelHasManySync\Tests\TestEnvironment\Models\User;
 
@@ -272,7 +271,7 @@ class HasManySyncTest extends TestCase
                     'content' => 'Updated Task 3 of Tester 2',
                 ]
                 // Delete, because task with id=1 is missing
-            ], true, false);
+            ], throwOnIdNotInScope: false);
         } catch (\Throwable $throwable) {
             // Assert
             $this->fail();

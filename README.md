@@ -65,7 +65,7 @@ $customer->contacts()->sync([
 ]);
 ```
 
-The sync method accepts an array of data to place on the intermediate table. Any data that are not in the given array will be removed from the intermediate table. So, after this operation is complete, only the data in the given array will exist in the intermediate table:
+The sync method accepts an array of data to place on the intermediate table. Any data that are not in the given array will be removed from the intermediate table. So, after this operation is complete, only the data in the given array will exist in the intermediate table.
 
 #### Syncing without deleting
 
@@ -86,6 +86,30 @@ $customer->contacts()->sync([
 ], false);
 ```
 
+#### Behaviour for IDs that are not part of the hasMany relation
+
+If an ID in the related data does not exist or is not in the scope of the `hasMany` relation, the `sync` function will throw a `ModelNotFoundException`.
+It is possible to modify this behavior with the `$throwOnIdNotInScope` attribute. Per default, this is set to `true`. If set to false, the `sync` function will ignore the Ids instead of throwing an exception.
+
+```php
+$customer->contacts()->sync([
+    [
+        'id' => 7, // ID that belongs to a different customer than `$customer`
+        'name' => 'Peter',
+        'phone_number' => '321',
+    ],
+    [
+        'id' => 1000, // ID that does not exist
+        'name' => 'Alfa',
+        'phone_number' => '123',
+    ],
+    [
+        'id' => null,
+        'name' => 'Adhitya',
+        'phone_number' => '234,
+    ]
+], throwOnIdNotInScope: false);
+```
 
 #### Example usage in the controller.
 
