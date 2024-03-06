@@ -8,6 +8,9 @@
 
 Allow sync method for Laravel Has Many Relationship.
 
+> [!NOTE]
+> Check out **solidtime - The modern Open Source Time-Tracker** at [solidtime.io](https://www.solidtime.io)
+
 ## Installation
 
 You can install the package via composer with following command:
