@@ -15,14 +15,14 @@ class User extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'name',
     ];
 
     /**
-     * @return HasMany<Task>
+     * @return HasMany<Task, $this>
      */
     public function tasks(): HasMany
     {

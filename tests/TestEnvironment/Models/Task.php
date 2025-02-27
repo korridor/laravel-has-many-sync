@@ -15,7 +15,7 @@ class Task extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'id',
@@ -24,7 +24,7 @@ class Task extends Model
     ];
 
     /**
-     * @return BelongsTo<User, Task>
+     * @return BelongsTo<User, $this>
      */
     public function user(): BelongsTo
     {
