@@ -25,7 +25,7 @@ class ServiceProvider extends BaseServiceProvider
                 'created' => [], 'deleted' => [], 'updated' => [],
             ];
 
-            /** @var HasMany<Model> $this */
+            /** @var HasMany<Model, Model> $this */
 
             // Get the primary key.
             $relatedKeyName = $this->getRelated()->getKeyName();
