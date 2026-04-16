@@ -45,7 +45,23 @@ jobs:
             laravel: 12.*
             testbench: 10.*
             composer-flag: '--prefer-lowest'
-
+          # Laravel 13.*
+          - php: 8.3
+            laravel: 13.*
+            testbench: 11.*
+            composer-flag: '--prefer-stable'
+          - php: 8.4
+            laravel: 13.*
+            testbench: 11.*
+            composer-flag: '--prefer-stable'
+          - php: 8.3
+            laravel: 13.*
+            testbench: 11.*
+            composer-flag: '--prefer-lowest'
+          - php: 8.4
+            laravel: 13.*
+            testbench: 11.*
+            composer-flag: '--prefer-lowest'
     runs-on: ubuntu-latest
 
     steps:
