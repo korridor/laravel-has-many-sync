@@ -19,7 +19,6 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot(): void
     {
-
         HasMany::macro('sync', function (array $data, bool $deleting = true, bool $throwOnIdNotInScope = true): array {
             $changes = [
                 'created' => [], 'deleted' => [], 'updated' => [],
@@ -30,7 +29,7 @@ class ServiceProvider extends BaseServiceProvider
             // Get the primary key.
             $relatedKeyName = $this->getRelated()->getKeyName();
 
-            // Get the current key values.
+            /** @var array<int, int|string> $currentIds Get the current key values. */
             $currentIds = $this->newQuery()->pluck($relatedKeyName)->all();
 
             // Cast the given key to an integer if it is numeric.
@@ -49,11 +48,12 @@ class ServiceProvider extends BaseServiceProvider
                 }, $keys);
             };
 
-            // The new ids, without null values
+            /** @var array<int, int|string> $dataIds The new ids, without null values */
             $dataIds = Arr::where($castKeys(Arr::pluck($data, $relatedKeyName)), function ($value) {
                 return !is_null($value);
             });
 
+            /** @var array<int, int|string> $problemKeys */
             $problemKeys = array_diff($dataIds, $currentIds);
             if ($throwOnIdNotInScope && count($problemKeys) > 0) {
                 throw (new ModelNotFoundException())->setModel(
